@@ -8,7 +8,7 @@ More info can be found [here.](https://docs.microsoft.com/en-us/azure/azure-reso
 
 ## Usage
 
-### Example 1 - Management Group with tenant root parent
+### Example 1 - Management Group with tenant root as parent
 ``` bicep
 targetScope = 'tenant'
 
@@ -24,7 +24,7 @@ module managementGroupGlobal '../main.bicep' = {
 }
 ```
 
-### Example 2 - Management Group with management group parent and subscriptions
+### Example 2 - Management Group with management group as parent and subscriptions
 ``` bicep
 targetScope = 'tenant'
 
