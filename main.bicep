@@ -18,7 +18,7 @@ resource managementGroup 'Microsoft.Management/managementGroups@2020-05-01' = {
     displayName: managementGroupDisplayName
     details: {
       parent: {
-        id: (!empty(parentManagementGroupId)) ? concat('/providers/Microsoft.Management/managementGroups/', parentManagementGroupId) : null
+        id: (!empty(parentManagementGroupId)) ? '/providers/Microsoft.Management/managementGroups/${parentManagementGroupId}' : null
       }
     }
   }

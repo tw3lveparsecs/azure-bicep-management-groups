@@ -12,10 +12,10 @@ More info can be found [here.](https://docs.microsoft.com/en-us/azure/azure-reso
 ``` bicep
 targetScope = 'tenant'
 
-param deploymentName string = concat('managementGroups', utcNow())
+param deploymentName string = 'managementGroups${utcNow()}'
 
-module managementGroupGlobal '../main.bicep' = {
-  name: concat(deploymentName, 'managementGroupGlobal')
+module managementGroupGlobal './main.bicep' = {
+  name: '${deploymentName}managementGroupGlobal'
   params: {
     managementGroupDisplayName: 'MyOrganisation'
     managementGroupId: 'gbl-org-mgp'
@@ -24,14 +24,14 @@ module managementGroupGlobal '../main.bicep' = {
 }
 ```
 
-### Example 2 - Management Group with management group as parent and subscriptions
+### Example 2 - Nested management group with subscriptions
 ``` bicep
 targetScope = 'tenant'
 
-param deploymentName string = concat('managementGroups', utcNow())
+param deploymentName string = 'managementGroups${utcNow()}'
 
-module managementGroupGlobal '../main.bicep' = {
-  name: concat(deploymentName, 'managementGroupGlobal')
+module managementGroupGlobal './main.bicep' = {
+  name: '${deploymentName}managementGroupGlobal'
   params: {
     managementGroupDisplayName: 'MyOrganisation'
     managementGroupId: 'gbl-org-mgp'
@@ -39,11 +39,11 @@ module managementGroupGlobal '../main.bicep' = {
   }
 }
 
-module managementGroupPlatform '../main.bicep' = {
-  name: concat(deploymentName, 'managementGroupPlatform')
+module managementGroupPlatform './main.bicep' = {
+  name: '${deploymentName}managementGroupSandbox'
   params: {
-    managementGroupDisplayName: 'Platform'
-    managementGroupId: 'pfm-org-mgp'
+    managementGroupDisplayName: 'Sandbox'
+    managementGroupId: 'sbx-org-mgp'
     parentManagementGroupId: managementGroupGlobal.outputs.managementGroupID
     subscriptionIds: [
       '63c1651a-ec30-4f6c-a3ec-671e23063585'
